@@ -9,4 +9,4 @@ class Message(BaseModel):
 
 @app.post('/')
 async def talk(message: Message):
-    return {"res":"ok","ID":message.user_id,"name":message.content}
+    return {"res":"okok","ID":message.user_id,"name":message.content}
