@@ -12,7 +12,7 @@ class Message(BaseModel):
 
 @app.post('/talk/')
 async def talk(message: Message):
-    return {"res": "okok", "ID": message.user_id, "name": message.content}
+    return {"res": "okokok", "ID": message.user_id, "name": message.content}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
