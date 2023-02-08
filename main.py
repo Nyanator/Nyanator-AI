@@ -7,6 +7,6 @@ class Message(BaseModel):
     user_id: str
     content: str
 
-@app.post('/')
+@app.post('/message/')
 async def talk(message: Message):
     return {"res":"okok","ID":message.user_id,"name":message.content}
