@@ -1,12 +1,13 @@
+from fastapi import FastAPI
 import openai
+import os
+from pydantic import BaseModel
 import urllib.parse
 import uvicorn
-from fastapi import FastAPI
-from pydantic import BaseModel
 
 app = FastAPI()
 
-openai.api_key = ""
+openai.api_key = os.environ['apikey']
 
 class Message(BaseModel):
     user_id: str
@@ -26,7 +27,7 @@ async def talk(message: Message):
         presence_penalty=0.6,
     )
 
-    return {"res": "okokok", "ID": message.user_id, "reply": response.choices[0].text}
+    return {"res": "ok", "ID": message.user_id, "reply": response.choices[0].text}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
