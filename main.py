@@ -9,6 +9,7 @@ app = FastAPI()
 
 openai.api_key = os.environ['apikey']
 
+
 class Message(BaseModel):
     user_id: str
     content: str
@@ -16,9 +17,9 @@ class Message(BaseModel):
 
 @app.post('/talk/')
 async def talk(message: Message):
-    prompt_text = "";
+    prompt_text = ""
     response = openai.Completion.create(
-        model="text-davinci-003",
+        model=os.environ['modelname'],
         prompt=prompt_text+urllib.parse.unquote(message.content),
         temperature=0.9,
         max_tokens=256,
@@ -27,7 +28,7 @@ async def talk(message: Message):
         presence_penalty=0.6,
     )
 
-    return {"res": "ok", "ID": message.user_id, "reply": response.choices[0].text}
+    return {"res": "ok", "ID": message.user_id, "reply": response.choices[0].text.lstrip()}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
