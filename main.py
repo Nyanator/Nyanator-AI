@@ -21,11 +21,10 @@ async def talk(message: Message):
     response = openai.Completion.create(
         model=os.environ['modelname'],
         prompt=prompt_text+urllib.parse.unquote(message.content),
-        temperature=0.9,
-        max_tokens=256,
-        top_p=1,
-        frequency_penalty=0.0,
-        presence_penalty=0.6,
+        temperature=0.99,
+        max_tokens=50,
+        frequency_penalty=2.0,
+        presence_penalty=2.0,
     )
 
     return {"res": "ok", "ID": message.user_id, "reply": response.choices[0].text.lstrip()}
