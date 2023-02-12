@@ -17,14 +17,15 @@ class Message(BaseModel):
 
 @app.post('/talk/')
 async def talk(message: Message):
-    prompt_text = ""
+    prompt_text = "以下AIの女の子Nyanatorとの会話。\n"
     response = openai.Completion.create(
         model=os.environ['modelname'],
         prompt=prompt_text+urllib.parse.unquote(message.content),
-        temperature=0.96,
+        temperature=0.2,
         max_tokens=50,
         frequency_penalty=2.0,
         presence_penalty=2.0,
+        stop='.'
     )
 
     return {"res": "ok", "ID": message.user_id, "reply": response.choices[0].text.lstrip()}
