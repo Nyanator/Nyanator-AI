@@ -21,7 +21,7 @@ async def talk(message: Message):
     response = openai.Completion.create(
         model=os.environ['modelname'],
         prompt=prompt_text+urllib.parse.unquote(message.content),
-        temperature=0.99,
+        temperature=0.96,
         max_tokens=50,
         frequency_penalty=2.0,
         presence_penalty=2.0,
