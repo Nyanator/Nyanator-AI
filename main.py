@@ -17,7 +17,7 @@ class Message(BaseModel):
 
 @app.post('/talk/')
 async def talk(message: Message):
-    prompt_text = "以下は猫耳女の子Nyanatorとの会話です。\n"
+    prompt_text = ""
     response = openai.Completion.create(
         model=os.environ['modelname'],
         prompt=prompt_text+urllib.parse.unquote(message.content)+" ->",
